@@ -3,7 +3,7 @@ body {
     flex-direction: column;
     align-items: center;
     margin: 0;
-    background-color: royalblue;
+    background-color: #ffebd3;
 }
 
 h3 {
@@ -11,27 +11,34 @@ h3 {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     border: solid black 2px;
     padding: 10px;
-    background-color: aliceblue;
+    background-color: #ffebd3;
 
 }
 
 .calculator {
     display: flex;
     border: solid black 2px;
-    width: 450px;
+    width: 400px;
     height: 600px;
     padding: 25px;
-    background-color: aliceblue;
+    background-color: #f1b086;
     flex-direction: column;
     border-radius: 15px;
 
 }
 
 .display {
-    width: 450px;
+    display: flex;
+    width: 400px;
     height: 180px;
-    background-color: #ebf1ac;
+    background-color: #ffebd3;
     border: solid black 1px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 65px;
+    justify-content: right;
+    align-items: end;
+    box-sizing: border-box;
+    padding: 15px;
 
 }
 
@@ -39,17 +46,62 @@ h3 {
     display: flex;
     margin-top: 15px;
     margin-bottom: 15px;
-    border: solid black 1px;
-    width: 450px;
+    width: 400px;
     height: 80px;
+    justify-content: space-between;
 
+}
+
+.clear, .delete {
+    display: flex;
+    width: 180px;
+    height: 70px;
+    border: solid black 1px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 25px;
+}
+
+.clear {
+    background-color: #fbbfbf;
+}
+
+.delete {
+    background-color: aliceblue;
 }
 
 .buttons {
-    border: solid black 1px;
+    display: flex;
     height: 300px;
-    width: 450px;
+    width: 400px;
+    justify-content: space-between;
+    flex-direction: column;
+    
 }
+
+.button {
+    display: flex;
+    border: solid black 1px;
+    height: 65px;
+    width: 80px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 25px;
+    background-color: #ffebd3;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+
 
 
 
