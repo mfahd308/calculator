@@ -1,9 +1,43 @@
 const buttonValues = '789/456x123-.0=+';
 let index = 0;
-console.log(buttonValues);
+
+let operands = ["", ""];
+let operator = "";
+currentAffect = 0;
+currentDisplay = 0;
+
+const display = document.querySelector('.display');
+display.textContent = "0";
+let displayNum = "";
 
 const grid = document.querySelector('.buttons');
 createButtons();
+
+const clear = document.querySelector('.clear');
+const del = document.querySelector('.delete');
+
+clear.addEventListener('click', (event) => {
+    operands[0] = "";
+    operands[1] = "";
+    operator = "";
+    display.textContent = "0";
+    currentAffect = 0;
+    currentDisplay = 0;
+});
+
+del.addEventListener('click', (event) => {
+    console.log(operands[currentAffect].length);
+    if (operands[currentAffect].length > 1) {
+        console.log('here');
+        operands[currentAffect] = operands[currentAffect].slice(0, -1); 
+        display.textContent = operands[currentDisplay];
+    } 
+    else {
+        display.textContent = "0";
+        operands[currentAffect] = "";
+    }
+    
+});
 
 function createButtons() {
     for (let i = 0; i < 4; i++) {
@@ -15,6 +49,56 @@ function createButtons() {
             button.textContent = buttonValues[index];
             index++;
             row.appendChild(button); 
+
+            button.addEventListener('click', (event) => {
+                if (isNumber(button.textContent)) {
+
+                    if (operands[currentAffect].length < 8) {
+                        operands[currentAffect] += button.textContent;
+                        currentDisplay = currentAffect;
+                    }
+                }
+                else if ( button.textContent == ".") {
+                    if (operands[currentAffect] != "") {
+                        if (operands[currentAffect].length < 8) {
+                            operands[currentAffect] += button.textContent;
+                            currentDisplay = currentAffect;
+                        }  
+                    }
+                }
+                else if (button.textContent == "=") {
+                    if (operands[1] != "") {
+                        operands[0] = String(operate(operands[0], operator, operands[1]));
+                        operands[1] = "";
+                        operator = "";
+                        currentAffect = 0;
+                        currentDisplay = 0;
+                    }
+                }
+                else {
+                    if (operands[0] != "") {
+                        if (operands[1] != "") {
+                            operands[0] = String(operate(operands[0], operator, operands[1]));
+                            operands[1] = "";
+
+                        }
+
+                        operator = button.textContent;
+                        currentAffect = 1;
+                        currentDisplay = 0;
+                    }
+
+                }
+
+                if (operands[currentDisplay].length > 8) {
+                    console.log(Number(operands[currentDisplay]).toPrecision(8));
+                    display.textContent = Number(operands[currentDisplay]).toPrecision(8);
+                }
+                else {
+                    display.textContent = operands[currentDisplay]; 
+                }
+                
+            });
         }
         grid.appendChild(row);
     }
@@ -37,17 +121,24 @@ function divide(x, y) {
 }
 
 function operate(operand1, operator, operand2) {
+    operand1 = Number(operand1);
+    operand2 = Number(operand2);
     switch (operator) {
-        case 'add':
+        case '+':
             return add(operand1, operand2);
-        case 'subtract':
+        case '-':
             return subtract(operand1, operand2);
-        case 'multiply':
+        case 'x':
             return multiply(operand1, operand2);
-        case 'divide':
+        case '/':
             return divide(operand1, operand2);
     }
     return 'invalid';
+}
+
+function isNumber(str) {
+    const num = Number(str);
+    return !isNaN(num) && Number.isFinite(num);
 }
 
 
