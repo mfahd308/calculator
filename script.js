@@ -10,6 +10,9 @@ const display = document.querySelector('.display');
 display.textContent = "0";
 let displayNum = "";
 
+const exponents = document.querySelector('.exponents');
+exponents.textContent = ''
+
 const grid = document.querySelector('.buttons');
 createButtons();
 
@@ -23,18 +26,32 @@ clear.addEventListener('click', (event) => {
     display.textContent = "0";
     currentAffect = 0;
     currentDisplay = 0;
+    exponents.textContent = '';
 });
 
 del.addEventListener('click', (event) => {
     console.log(operands[currentAffect].length);
     if (operands[currentAffect].length > 1) {
-        console.log('here');
         operands[currentAffect] = operands[currentAffect].slice(0, -1); 
-        display.textContent = operands[currentDisplay];
     } 
     else if (operands[currentAffect].length == 1) {
-        display.textContent = "0";
         operands[currentAffect] = "";
+    }
+
+    if (operands[currentDisplay].length > 8) {
+        console.log(Number(operands[currentDisplay]).toPrecision(8));
+        display.textContent = Number(operands[currentDisplay]).toPrecision(8).slice(0, 9);
+        exponents.textContent = Number(operands[currentDisplay]).toPrecision(8).slice(9);
+    }
+    else {
+        exponents.textContent = '';
+        if (operands[currentDisplay] == "") {
+            display.textContent = "0"; 
+        }
+        else {
+            display.textContent = operands[currentDisplay]; 
+        }
+        
     }
     
 });
@@ -99,8 +116,10 @@ function createButtons() {
                 if (operands[currentDisplay].length > 8) {
                     console.log(Number(operands[currentDisplay]).toPrecision(8));
                     display.textContent = Number(operands[currentDisplay]).toPrecision(8).slice(0, 9);
+                    exponents.textContent = Number(operands[currentDisplay]).toPrecision(8).slice(9);
                 }
                 else {
+                    exponents.textContent = '';
                     if (operands[currentDisplay] == "") {
                         display.textContent = "0"; 
                     }
