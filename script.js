@@ -32,7 +32,7 @@ del.addEventListener('click', (event) => {
         operands[currentAffect] = operands[currentAffect].slice(0, -1); 
         display.textContent = operands[currentDisplay];
     } 
-    else {
+    else if (operands[currentAffect].length == 1) {
         display.textContent = "0";
         operands[currentAffect] = "";
     }
@@ -65,6 +65,12 @@ function createButtons() {
                             currentDisplay = currentAffect;
                         }  
                     }
+                    else {
+                        if (operands[currentAffect].length < 8) {
+                            operands[currentAffect] += "0" + button.textContent;
+                            currentDisplay = currentAffect;
+                        }  
+                    }
                 }
                 else if (button.textContent == "=") {
                     if (operands[1] != "") {
@@ -76,13 +82,13 @@ function createButtons() {
                     }
                 }
                 else {
+                    
                     if (operands[0] != "") {
                         if (operands[1] != "") {
                             operands[0] = String(operate(operands[0], operator, operands[1]));
                             operands[1] = "";
 
                         }
-
                         operator = button.textContent;
                         currentAffect = 1;
                         currentDisplay = 0;
@@ -92,10 +98,16 @@ function createButtons() {
 
                 if (operands[currentDisplay].length > 8) {
                     console.log(Number(operands[currentDisplay]).toPrecision(8));
-                    display.textContent = Number(operands[currentDisplay]).toPrecision(8);
+                    display.textContent = Number(operands[currentDisplay]).toPrecision(8).slice(0, 9);
                 }
                 else {
-                    display.textContent = operands[currentDisplay]; 
+                    if (operands[currentDisplay] == "") {
+                        display.textContent = "0"; 
+                    }
+                    else {
+                        display.textContent = operands[currentDisplay]; 
+                    }
+                    
                 }
                 
             });
