@@ -76,17 +76,19 @@ function createButtons() {
                     }
                 }
                 else if ( button.textContent == ".") {
-                    if (operands[currentAffect] != "") {
-                        if (operands[currentAffect].length < 8) {
-                            operands[currentAffect] += button.textContent;
-                            currentDisplay = currentAffect;
-                        }  
-                    }
-                    else {
-                        if (operands[currentAffect].length < 8) {
-                            operands[currentAffect] += "0" + button.textContent;
-                            currentDisplay = currentAffect;
-                        }  
+                    if (!operands[currentAffect].includes('.')) {
+                        if (operands[currentAffect] != "") {
+                            if (operands[currentAffect].length < 8) {
+                                operands[currentAffect] += button.textContent;
+                                currentDisplay = currentAffect;
+                            }  
+                        }
+                        else {
+                            if (operands[currentAffect].length < 8) {
+                                operands[currentAffect] += "0" + button.textContent;
+                                currentDisplay = currentAffect;
+                            }  
+                        }
                     }
                 }
                 else if (button.textContent == "=") {
